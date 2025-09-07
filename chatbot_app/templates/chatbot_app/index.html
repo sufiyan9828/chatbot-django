@@ -65,18 +65,16 @@
         const chatMessages = document.getElementById('chat-messages');
         const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
-        // Function to display a message in the chat window
         function displayMessage(message, isUser = false) {
             const messageDiv = document.createElement('div');
             messageDiv.classList.add('chat-message', isUser ? 'user-message' : 'bot-message');
             messageDiv.textContent = message;
             chatMessages.appendChild(messageDiv);
-            // Scroll to the bottom of the chat window
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
         chatForm.addEventListener('submit', async (e) => {
-            e.preventDefault(); // This is crucial! It stops the page from reloading
+            e.preventDefault(); 
 
             const message = userInput.value.trim();
             if (message === '') return;
@@ -85,7 +83,6 @@
             userInput.value = '';
 
             try {
-                // Use the fetch API to send the message to the Django backend
                 const response = await fetch('', {
                     method: 'POST',
                     headers: {
