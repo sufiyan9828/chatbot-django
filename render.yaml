@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: chatbot-django
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn chatbot_project.wsgi:application"
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
