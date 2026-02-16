@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Website - Chatbot Integration</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .feature {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .integration-status {
+            background: #e8f5e8;
+            border: 1px solid #4caf50;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .code-block {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Demo Website</h1>
+        <p>Welcome to our demo website! This page shows how easy it is to integrate your chatbot.</p>
+        
+        <div class="integration-status">
+            ✅ Chatbot integration is active! Look for the chat widget in the bottom-right corner.
+        </div>
+        
+        <div class="feature">
+            <h3>🤖 Chatbot Features</h3>
+            <ul>
+                <li>Friendly, conversational responses</li>
+                <li>Quick action buttons for common requests</li>
+                <li>Contact information and business details</li>
+                <li>Human handoff when needed</li>
+                <li>Beautiful, modern interface</li>
+            </ul>
+        </div>
+        
+        <div class="feature">
+            <h3>📱 Multi-Platform Support</h3>
+            <p>Your chatbot works on:</p>
+            <ul>
+                <li>✅ Website (current demo)</li>
+                <li>✅ Facebook Messenger</li>
+                <li>✅ WhatsApp Business</li>
+                <li>✅ Custom API integrations</li>
+            </ul>
+        </div>
+        
+        <div class="feature">
+            <h3>🔧 Integration Code</h3>
+            <p>Add this single line to any website to enable the chatbot:</p>
+            <div class="code-block">
+                &lt;script src="http://127.0.0.1:8000/embed/"&gt;&lt;/script&gt;
+            </div>
+        </div>
+        
+        <div class="feature">
+            <h3>💬 Try It Out!</h3>
+            <p>Click the chat widget in the bottom-right corner to start a conversation. Try these commands:</p>
+            <ul>
+                <li>Type "hello" for a friendly greeting</li>
+                <li>Type "contact" for business information</li>
+                <li>Type "services" to see what we offer</li>
+                <li>Type "hours" for business hours</li>
+                <li>Type "human" to connect with a person</li>
+            </ul>
+        </div>
+        
+        <div class="feature">
+            <h3>📊 Analytics & Monitoring</h3>
+            <p>Monitor your chatbot performance:</p>
+            <ul>
+                <li>Message volume and response times</li>
+                <li>User engagement metrics</li>
+                <li>AI service performance</li>
+                <li>Error tracking and alerts</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Chatbot Embed Code -->
+    <script>
+    (function() {
+        var chatbotContainer = document.createElement('div');
+        chatbotContainer.id = 'chatbot-embed';
+        chatbotContainer.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+            z-index: 10000;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            transition: all 0.3s ease;
+        `;
+        
+        chatbotContainer.innerHTML = `
+            <style>
+                .chat-widget { height: 100%; display: flex; flex-direction: column; }
+                .chat-header { 
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white; padding: 15px; border-radius: 12px 12px 0 0;
+                    display: flex; justify-content: space-between; align-items: center;
+                }
+                .chat-body { flex: 1; padding: 15px; overflow-y: auto; }
+                .chat-input { 
+                    padding: 15px; border-top: 1px solid #eee; 
+                    display: flex; gap: 10px; 
+                }
+                .chat-input input { flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 20px; }
+                .chat-input button { 
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer;
+                }
+                .minimize-btn { background: none; border: none; color: white; cursor: pointer; font-size: 18px; }
+                .chat-message { 
+                    margin: 10px 0; padding: 8px 12px; border-radius: 12px; max-width: 80%;
+                }
+                .user-message { background: #e3f2fd; margin-left: auto; text-align: right; }
+                .bot-message { background: #f3e5f5; }
+            </style>
+            <div class="chat-widget">
+                <div class="chat-header">
+                    <span>🤖 Your Assistant</span>
+                    <button class="minimize-btn" onclick="toggleChat()">−</button>
+                </div>
+                <div class="chat-body" id="chat-messages">
+                    <div class="chat-message bot-message">👋 Hey there! How can I help you today?</div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="chat-input" placeholder="Type a message..." onkeypress="if(event.key==='Enter') sendMessage()">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(chatbotContainer);
+        
+        window.toggleChat = function() {
+            var container = document.getElementById('chatbot-embed');
+            if (container.style.height === '60px') {
+                container.style.height = '500px';
+            } else {
+                container.style.height = '60px';
+            }
+        };
+        
+        window.sendMessage = function() {
+            var input = document.getElementById('chat-input');
+            var messages = document.getElementById('chat-messages');
+            var message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            var userMsg = document.createElement('div');
+            userMsg.className = 'chat-message user-message';
+            userMsg.textContent = message;
+            messages.appendChild(userMsg);
+            
+            input.value = '';
+            
+            // Send to server
+            fetch('http://127.0.0.1:8000/api/webhook/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    message: message,
+                    platform: 'website',
+                    user_id: 'website_user'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                var botMsg = document.createElement('div');
+                botMsg.className = 'chat-message bot-message';
+                botMsg.textContent = data.response || 'Sorry, I had trouble processing that.';
+                messages.appendChild(botMsg);
+                messages.scrollTop = messages.scrollHeight;
+            })
+            .catch(error => {
+                var botMsg = document.createElement('div');
+                botMsg.className = 'chat-message bot-message';
+                botMsg.textContent = 'Connection error. Please try again.';
+                messages.appendChild(botMsg);
+            });
+            
+            messages.scrollTop = messages.scrollHeight;
+        };
+    })();
+    </script>
+    <!-- End Chatbot Embed Code -->
+</body>
+</html>
